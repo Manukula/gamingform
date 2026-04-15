@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registering form</title>
+</head>
+<body>
+              <p>Please secure your ticket by registering through this link. Payments can be conveniently made via WhatsApp chat or in person with our team. Kindly include your name in your registration to be added to our official list. We look forward to welcoming you!</p>
+    <form name="submit-to-google-sheet">
+
+        <h2>Gaming tournament registration form</h2>
+    
+    <!-- Application Type -->
+    <label>Application Type</label><br><br>
+    <select name="participation" id="participation" required>
+        <option value="">-- Select an option --</option>
+        <option value="solo">Solo</option>
+        <option value="team">Team</option>
+    </select>
+
+    <br><br>
+
+    <!-- SOLO FIELDS -->
+    <div id="soloFields" style="display:none;">
+        <h3>Solo Player Details</h3>
+
+        <label>Name:</label>
+        <input type="text" name="name"><br><br>
+
+        <label>Game Handler:</label>
+        <input type="text" name="handler"><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="num"><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email"><br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age"><br><br>
+    </div>
+
+    <!-- TEAM FIELDS -->
+    <div id="teamFields" style="display:none;">
+        <h3>Team Details</h3>
+
+        <label>Team Name:</label>
+        <input type="text" name="team_name"><br><br>
+
+        <label>Team Member 1:</label>
+        <input type="text" name="member1"><br><br>
+
+        <label>Team Member 2:</label>
+        <input type="text" name="member2"><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="team_gender" value="Male"> Male
+        <input type="radio" name="team_gender" value="Female"> Female
+        <input type="radio" name="team_gender" value="Male&Female"> Male&female
+        <input type="radio" name="team_gender" value="Male&Male"> Male&Male
+        <input type="radio" name="team_gender" value="Female"> Female&Female
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="team_phone"><br><br>
+
+        <label>Age:</label>
+        <br>
+        <input type="number" name="team_age1"><br><br>
+        <input type="number" name="team_age2"><br><br>
+    </div>
+
+    <input type="submit" value="Submit">
+    <span id="success"></span>
+</form>
+<script>
+
+
+const participation = document.getElementById("participation");
+const soloFields = document.getElementById("soloFields");
+const teamFields = document.getElementById("teamFields");
+
+participation.addEventListener("change", function () {
+    if (this.value === "solo") {
+        soloFields.style.display = "block";
+        teamFields.style.display = "none";
+    } else if (this.value === "team") {
+        soloFields.style.display = "none";
+        teamFields.style.display = "block";
+    } else {
+        soloFields.style.display = "none";
+        teamFields.style.display = "none";
+    } 
+
+    });
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbypDE_TqV6jGmzYnGIBpRXVIG66ghthraFF0FUho9SOLYZlXkDTZEIIrzBcGPZTmzw2NQ/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const msg = document.getElementById("success")
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        msg.innerHTML = "Message sent successfully"
+        form.reset()
+      })
+      .catch(error => {
+        console.error('Error!', error.message)
+        msg.innerHTML = "Error sending message"
+      })
+  })
+</script>
+
+    
+
+    
+
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="script.js">
+
+<title>Gaming Tournament Registration</title>
+
+
+<style>
+
+</style>
+</head>
+
+<body>
+
+<div class="tournament-container">
+
+    <div class="info-bar">
+        Please secure your ticket by registering. Payments can be made via WhatsApp or in person.
+    </div>
+
+    <div class="form-wrapper">
+        <form name="submit-to-google-sheet" class="reg-form">
+
+            <h2>Gaming Tournament Registration</h2>
+
+            <!-- Application Type -->
+            <label>Application Type</label>
+            <select id="participation" name="participation" required>
+                <option value="">-- Select --</option>
+                <option value="solo">Solo</option>
+                <option value="team">Team</option>
+            </select>
+
+            <!-- SOLO -->
+            <div id="soloFields" style="display:none;">
+                <label>Name</label>
+                <input type="text" name="name">
+
+                <label>Game Handler</label>
+                <input type="text" name="handler">
+
+                <label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                </div>
+
+                <label>Phone</label>
+                <input type="tel" name="phone">
+
+                <label>Email</label>
+                <input type="email" name="email">
+
+                <label>Age</label>
+                <input type="number" name="age">
+            </div>
+
+            <!-- TEAM -->
+            <div id="teamFields" style="display:none;">
+                <label>Team Name</label>
+                <input type="text" name="team_name">
+
+                <label>Member 1</label>
+                <input type="text" name="member1">
+
+                <label>Member 2</label>
+                <input type="text" name="member2">
+
+                <label>Phone</label>
+                <input type="tel" name="team_phone">
+
+                 <label>Gender:</label><br>
+        <select name="team_gender" required>
+            <option value="">-- Select --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Male&Female">Male & Female</option>
+            <option value="Male&Male">Male & Male</option>
+            <option value="Female&Female">Female & Female</option>
+        </select>
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="team_phone"><br><br>
+
+        <label>Age:</label>
+        <br> 
+        <input type="number" name="team_age1"><br><br>
+        <input type="number" name="team_age2"><br><br>
+            </div>
+
+            <button type="submit">Register</button>
+            <span id="success"></span>
+
+        </form>
+    </div>
+
+<section class="about">
+
+    <div class="about-grid">
+
+        <!-- DUOS -->
+        <div class="card duos hidden">
+            <h2> DUOS</h2>
+            <p>
+                Join with a partner and compete for R500. 
+                Solo players can enter duos for FREE.
+                but Duos competitors must pay a fee of R50
+            </p>
+        </div>
+
+        <!-- PARTICIPATION -->
+        <div class="card participation hidden">
+            <h2> HOW IT WORKS</h2>
+            <p>
+                Enter solo for R100 and compete for a prize pool of R1000 – R2000.
+            </p>
+        </div>
+
+        <!-- GAMERS -->
+        <div class="card gamers hidden">
+            <h2>GAMERS ENTRY</h2>Go back. 
+            <p>
+                Free play zone! Enjoy Fortnite, COD, Roblox, minecraft & more. in Xbox, Playstation, GAming Computers and Gaming Laptops explore the gaming world
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+<script src="script.js">
+    
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: white;
+}
+
+/* Background */
+.tournament-container {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(background.png);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Info bar */
+.info-bar {
+    border: 2px solid #8a2be2;
+    background: rgba(138, 43, 226, 0.1);
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* Form */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.reg-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.reg-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+label {
+    font-weight: bold;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #ff4bb0;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#success {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+
+/* section */
+
+/* ===== ABOUT SECTION ===== */
+.about {
+    margin-top: 80px;
+    padding: 50px 20px;
+}
+
+/* GRID */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* CARD STYLE (Gaming Dashboard) */
+.card {
+    position: relative;
+    background: linear-gradient(145deg, #0f172a, #020617);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    transition: 0.4s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Neon glow effect */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    padding: 2px;
+    background: linear-gradient(45deg, #ff4bb0, #00c3ff, #00ff9d);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Hover effect */
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Titles */
+.card h2 {
+    margin-bottom: 15px;
+    color: #ffb703;
+}
+
+/* Text */
+.card p {
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Special center highlight */
+.participation {
+    transform: scale(1.05);
+}
+
+/* ===== SCROLL ANIMATION ===== */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .participation {
+        transform: none;
+    }
+}
