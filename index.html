@@ -70,10 +70,6 @@ input, select {
     color: white;
 }
 
-input::placeholder {
-    color: #ccc;
-}
-
 label {
     font-weight: bold;
 }
@@ -84,27 +80,32 @@ label {
     margin-bottom: 15px;
 }
 
+/* Button */
 button {
     width: 100%;
     padding: 12px;
-    background: #ff4bb0;
+    background: linear-gradient(135deg, #ff4bb0, #ffb703);
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(255, 75, 176, 0.4);
+}
+
+button:active {
+    transform: scale(0.97);
 }
 
 #success {
-    display: block;
-    margin-top: 10px;
     text-align: center;
+    margin-top: 10px;
 }
-
-
-
-
-/* section */
 
 /* ===== ABOUT SECTION ===== */
 .about {
@@ -112,7 +113,6 @@ button {
     padding: 50px 20px;
 }
 
-/* GRID */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -121,20 +121,16 @@ button {
     margin: auto;
 }
 
-/* CARD STYLE (Gaming Dashboard) */
 .card {
     position: relative;
     background: linear-gradient(145deg, #0f172a, #020617);
     border-radius: 15px;
     padding: 30px;
     text-align: center;
-    color: white;
     overflow: hidden;
     transition: 0.4s;
-    border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Neon glow effect */
 .card::before {
     content: "";
     position: absolute;
@@ -144,37 +140,27 @@ button {
     background: linear-gradient(45deg, #ff4bb0, #00c3ff, #00ff9d);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
-    mask-composite: exclude;
 }
 
-/* Hover effect */
 .card:hover {
     transform: translateY(-10px) scale(1.03);
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
-/* Titles */
 .card h2 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #ffb703;
 }
 
-/* Text */
 .card p {
     color: #ccc;
-    font-size: 0.95rem;
 }
 
-/* Special center highlight */
-.participation {
-    transform: scale(1.05);
-}
-
-/* ===== SCROLL ANIMATION ===== */
+/* Animation */
 .hidden {
     opacity: 0;
     transform: translateY(40px);
-    transition: all 0.8s ease;
+    transition: 0.8s;
 }
 
 .show {
@@ -182,14 +168,10 @@ button {
     transform: translateY(0);
 }
 
-/* MOBILE */
-@media (max-width: 800px) {
+/* Mobile */
+@media(max-width:800px){
     .about-grid {
         grid-template-columns: 1fr;
-    }
-
-    .participation {
-        transform: none;
     }
 }
 </style>
@@ -199,173 +181,167 @@ button {
 
 <div class="tournament-container">
 
-    <div class="info-bar">
-        Please secure your ticket by registering. Payments can be made via WhatsApp or in person.
-    </div>
+<div class="info-bar">
+    Please secure your ticket by registering.
+</div>
 
-    <div class="form-wrapper">
-        <form name="submit-to-google-sheet" class="reg-form">
+<div class="form-wrapper">
+<form name="submit-to-google-sheet" class="reg-form">
 
-            <h2>Gaming Tournament Registration</h2>
+<h2>Gaming Tournament Registration</h2>
 
-            <!-- Application Type -->
-            <label>Application Type</label>
-            <select id="participation" name="participation" required>
-                <option value="">-- Select --</option>
-                <option value="solo">Solo</option>
-                <option value="team">Team</option>
-            </select>
+<label>Application Type</label>
+<select id="participation" name="participation" required>
+    <option value="">-- Select --</option>
+    <option value="solo">Solo</option>
+    <option value="team">Team</option>
+</select>
 
-            <!-- SOLO -->
-            <div id="soloFields" style="display:none;">
-                <label>Name</label>
-                <input type="text" name="name">
+<!-- SOLO -->
+<div id="soloFields" style="display:none;">
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="handler" placeholder="Game Handler">
+    <input type="tel" name="phone" placeholder="Phone">
+    <input type="email" name="email" placeholder="Email">
+    <input type="number" name="age" placeholder="Age">
+</div>
 
-                <label>Game Handler</label>
-                <input type="text" name="handler">
+<!-- TEAM -->
+<div id="teamFields" style="display:none;">
+    <input type="text" name="team_name" placeholder="Team Name">
+    <input type="text" name="member1" placeholder="Member 1">
+    <input type="text" name="member2" placeholder="Member 2">
+    <input type="tel" name="team_phone" placeholder="Phone">
 
-                <label>Gender</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="gender" value="Male"> Male</label>
-                    <label><input type="radio" name="gender" value="Female"> Female</label>
-                </div>
+    <select name="team_gender">
+        <option value="">Team Type</option>
+        <option>Male & Male</option>
+        <option>Female & Female</option>
+        <option>Mixed</option>
+    </select>
 
-                <label>Phone</label>
-                <input type="tel" name="phone">
+    <input type="number" name="team_age1" placeholder="Age Member 1">
+    <input type="number" name="team_age2" placeholder="Age Member 2">
+</div>
 
-                <label>Email</label>
-                <input type="email" name="email">
+<button type="submit">Register</button>
+<span id="success"></span>
 
-                <label>Age</label>
-                <input type="number" name="age">
-            </div>
+</form>
+</div>
 
-            <!-- TEAM -->
-            <div id="teamFields" style="display:none;">
-                <label>Team Name</label>
-                <input type="text" name="team_name">
-
-                <label>Member 1</label>
-                <input type="text" name="member1">
-
-                <label>Member 2</label>
-                <input type="text" name="member2">
-
-                <label>Phone</label>
-                <input type="tel" name="team_phone">
-
-                 <label>Gender:</label><br>
-        <select name="team_gender" required>
-            <option value="">-- Select --</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Male&Female">Male & Female</option>
-            <option value="Male&Male">Male & Male</option>
-            <option value="Female&Female">Female & Female</option>
-        </select>
-        <br><br>
-
-        <label>Phone Number:</label>
-        <input type="tel" name="team_phone"><br><br>
-
-        <label>Age:</label>
-        <br>Hey, Cortana. Hold on. Hey, Cortana. 
-        <input type="number" name="team_age1"><br><br>
-        <input type="number" name="team_age2"><br><br>
-            </div>
-
-            <button type="submit">Register</button>
-            <span id="success"></span>
-
-        </form>
-    </div>
-
+<!-- ABOUT -->
 <section class="about">
+<div class="about-grid">
 
-    <div class="about-grid">
+<div class="card hidden">
+<h2>DUOS</h2>
+<p>Join with a partner and compete for R500. Solo players enter free.</p>
+</div>
 
-        <!-- DUOS -->
-        <div class="card duos hidden">
-            <h2> DUOS</h2>
-            <p>
-                Join with a partner and compete for R500. 
-                Solo players can enter duos for FREE.
-                but Duos competitors must pay a fee of R50
-            </p>
-        </div>
+<div class="card hidden">
+<h2>HOW IT WORKS</h2>
+<p>Enter solo for R100 and win up to R2000.</p>
+</div>
 
-        <!-- PARTICIPATION -->
-        <div class="card participation hidden">
-            <h2> HOW IT WORKS</h2>
-            <p>
-                Enter solo for R100 and compete for a prize pool of R1000 – R2000.
-            </p>
-        </div>
+<div class="card hidden">
+<h2>GAMERS</h2>
+<p>Play Fortnite, COD, Roblox & more for free.</p>
+</div>
 
-        <!-- GAMERS -->
-        <div class="card gamers hidden">
-            <h2>GAMERS ENTRY</h2>Go back. 
-            <p>
-                Free play zone! Enjoy Fortnite, COD, Roblox, minecraft & more. in Xbox, Playstation, GAming Computers and Gaming Laptops explore the gaming world
-            </p>
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 </div>
 
 <script>
-// Show/Hide fields
+// Elements
 const participation = document.getElementById("participation");
 const solo = document.getElementById("soloFields");
 const team = document.getElementById("teamFields");
+const form = document.forms['submit-to-google-sheet'];
+const msg = document.getElementById("success");
 
-participation.addEventListener("change", () => {
-    if (participation.value === "solo") {
+const soloInputs = solo.querySelectorAll("input, select");
+const teamInputs = team.querySelectorAll("input, select");
+
+// Toggle required
+function toggleFields(inputs, enable){
+    inputs.forEach(input=>{
+        if(enable){
+            input.setAttribute("required", "true");
+        } else {
+            input.removeAttribute("required");
+        }
+    });
+}
+
+// Switch
+participation.addEventListener("change", ()=>{
+    if(participation.value === "solo"){
         solo.style.display = "block";
         team.style.display = "none";
-    } else if (participation.value === "team") {
+
+        toggleFields(soloInputs, true);
+        toggleFields(teamInputs, false);
+        teamInputs.forEach(i => i.value = "");
+
+    } else if(participation.value === "team"){
         solo.style.display = "none";
         team.style.display = "block";
+
+        toggleFields(soloInputs, false);
+        toggleFields(teamInputs, true);
+        soloInputs.forEach(i => i.value = "");
+
     } else {
         solo.style.display = "none";
         team.style.display = "none";
+
+        toggleFields(soloInputs, false);
+        toggleFields(teamInputs, false);
     }
 });
 
-// Google Sheets Submit
-const scriptURL = 'https://script.google.com/macros/s/AKfycbypDE_TqV6jGmzYnGIBpRXVIG66ghthraFF0FUho9SOLYZlXkDTZEIIrzBcGPZTmzw2NQ/exec'
-const form = document.forms['submit-to-google-sheet']
-const msg = document.getElementById("success")
+// Submit
+const scriptURL = 'https://script.google.com/macros/s/AKfycbypDE_TqV6jGmzYnGIBpRXVIG66ghthraFF0FUho9SOLYZlXkDTZEIIrzBcGPZTmzw2NQ/exec';
 
-form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-    .then(() => {
-        msg.innerHTML = "✅ Registered successfully!"
-        form.reset()
-        solo.style.display = "none"
-        team.style.display = "none"
+form.addEventListener('submit', e=>{
+    e.preventDefault();
+
+    msg.innerHTML = "⏳ Sending...";
+
+    fetch(scriptURL, {
+        method:'POST',
+        body:new FormData(form)
     })
-    .catch(() => {
-        msg.innerHTML = "❌ Error submitting form"
+    .then(()=>{
+        msg.innerHTML = "✅ Registered successfully!";
+        msg.style.color = "#00ff9d";
+
+        form.reset();
+        solo.style.display = "none";
+        team.style.display = "none";
+
+        toggleFields(soloInputs, false);
+        toggleFields(teamInputs, false);
     })
-})
+    .catch(()=>{
+        msg.innerHTML = "❌ Error submitting form";
+        msg.style.color = "red";
+    });
+});
 
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+// Scroll animation
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
             entry.target.classList.add("show");
         }
     });
 });
 
-const hiddenElements = document.querySelectorAll(".hidden");
-hiddenElements.forEach(el => observer.observe(el));
-
+document.querySelectorAll(".hidden").forEach(el=>observer.observe(el));
 </script>
 
 </body>
